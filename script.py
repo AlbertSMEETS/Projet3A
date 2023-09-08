@@ -52,30 +52,30 @@ def main():
                 else :
                         print("trouve en " + str(tries) + " essais")
         
-                file = open(".score.txt", "r")
-                data = file.readlines()
-                score = int(data[0].strip("\n")) + tries
-                file.close()
-                
-                file = open(".score.txt", "w")
-                file.write(str(score))
-                print("Votre score est " + str(score))
-                file.close()
-                
-                file = open(".nbParties.txt", "r")
-                data = file.readlines()
-                nb = int(data[0].strip("\n")) + 1
-                file.close()
-                
-                file = open(".nbParties.txt", "w")
-                file.write(str(nb))
-                print("Vous avez joue " + str(nb) + " fois") 
-                file.close()
-                answer = int(input("voulez vous rejouer, reinitialiser les stats ou quitter ? (1/2/3)\n"))
-                if(answer == 2 ):
-                    reset()
-                elif(answer == 3):
-                    play = False                    
+            file = open(".score.txt", "r")
+            data = file.readlines()
+            score = int(data[0].strip("\n")) + tries
+            file.close()
+            
+            file = open(".score.txt", "w")
+            file.write(str(score))
+            print("Votre score est " + str(score))
+            file.close()
+            
+            file = open(".nbParties.txt", "r")
+            data = file.readlines()
+            nb = int(data[0].strip("\n")) + 1
+            file.close()
+            
+            file = open(".nbParties.txt", "w")
+            file.write(str(nb))
+            print("Vous avez joue " + str(nb) + " fois") 
+            file.close()
+            answer = int(input("voulez vous rejouer, reinitialiser les stats ou quitter ? (1/2/3)\n"))
+            if(answer == 2 ):
+                reset()
+            elif(answer == 3):
+                play = False                    
 
     elif(choice == 2):
         while(play):
@@ -87,8 +87,10 @@ def main():
                 while (guess != n and tries <= maxTries):
                         tries += 1
                         guess = int(mini + ((maxi-mini)/2))
-                        randomPourcent=random.randint(int(guess*(0.9)),int(guess*(1.1)))
-                        guess+= randomPourcent
+                        randomPourcent=random.randint(int(guess-((10/100)*guess)),int(guess+((10/100)*guess)))
+                        while((randomPourcent <= mini or randomPourcent >= maxi) and randomPourcent != n):
+                            randomPourcent=random.randint(int(guess-((10/100)*guess)),int(guess+((10/100)*guess)))
+                        guess= randomPourcent
                         print("Le robot a choisi " + str(guess))
                         if (guess < n) :                         
                                 mini = guess + 1
