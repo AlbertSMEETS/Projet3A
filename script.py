@@ -18,9 +18,9 @@ def main():
     play = True
     maxTries = 100
 
-    file = open(".score.txt", "r")
-    data = file.readlines()
-    score = int(data[0].strip("\n"))
+    file = open(".score.txt", "r") # with est préféré selon la doc
+    data = file.readlines() # On peut utiliser read et strip
+    score = int(data[0].strip("\n")) # ça évite la gymnastique avec [0]
     file.close()
             
     file = open(".nbParties.txt", "r")
@@ -33,7 +33,7 @@ def main():
 
 
     choice = int(input("Voulez vous jouer seul, contre un robot, reinitialiser les stats ou quitter (1/2/3/4) ?\n"))
-    if (choice == 1 ): 
+    if (choice == 1 ): # en python (et par cohérence avec ton while) les parenthèses ne sont pas conseillées ici
         while play:
             n = random.randint(mini, maxi)
             guess = -1
@@ -62,7 +62,7 @@ def main():
             print("Votre score est " + str(score))
             file.close()
             
-            file = open(".nbParties.txt", "r")
+            file = open(".nbParties.txt", "r") # doit-on vraiment réouvrir le fichier ?
             data = file.readlines()
             nb = int(data[0].strip("\n")) + 1
             file.close()
